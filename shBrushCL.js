@@ -30,13 +30,13 @@ SyntaxHighlighter.brushes.CL = function () {
 	'with-hash-table-iterator with-input-from-string with-open-file ' +
 	'with-open-stream with-output-to-string with-package-iterator ' +
 	'with-simple-restart with-slots with-standard-io-syntax catch throw ' +
-	'provide require t nil';
+	'provide require t nil defun defvar defparameter';
     var errorKeywords = 'abort assert warn check-type cerror error signal';
 
     var symbolRegex = '\\w?(\\w|-)*';
 
     this.regexList = [
-	{ regex: new RegExp(';.*', 'g'), css: 'comments' },
+	{ regex: new RegExp('(^|(\s+));.*', 'g'), css: 'comments' },
 	{ regex: new RegExp('\\:' + symbolRegex, 'g'), css: 'color2' },
 	{ regex: new RegExp('&amp;' + symbolRegex, 'g'), css: 'value' },
 	{ regex: new RegExp("'" + symbolRegex, 'g'), css: 'variable' },
