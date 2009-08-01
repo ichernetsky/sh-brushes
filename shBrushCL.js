@@ -36,7 +36,8 @@ SyntaxHighlighter.brushes.CL = function () {
     var symbolRegex = '\\w?(\\w|-)*';
 
     this.regexList = [
-	{ regex: new RegExp('^.*;.*', 'g'), css: 'comments' },
+	{ regex: new RegExp('(?:^);.*$', 'gm'), css: 'comments' },
+	{ regex: new RegExp('(?:\\s+);.*$', 'gm'), css: 'comments' },
 	{ regex: new RegExp('\\:' + symbolRegex, 'g'), css: 'color2' },
 	{ regex: new RegExp('&amp;' + symbolRegex, 'g'), css: 'value' },
 	{ regex: new RegExp("'" + symbolRegex, 'g'), css: 'variable' },
