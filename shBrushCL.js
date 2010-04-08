@@ -37,14 +37,23 @@ SyntaxHighlighter.brushes.CL = function () {
   var symbolRegex = '(?:&amp;|&lt;|&gt;|[-\\w\\d/<>\\=\\?\\*\\+%&]){3,}';
 
   this.regexList = [
+    // keyword symbols
     { regex: new RegExp(beforeSymbol + '\\:' + symbolRegex, 'g'),         css: 'functions' },
+    // lambda list keywords
     { regex: new RegExp(beforeSymbol + '(?:&amp;|&)' + symbolRegex, 'g'), css: 'value' },
+    // quoted symbols
     { regex: new RegExp(beforeSymbol + "'" + symbolRegex, 'g'),           css: 'variable' },
+    // constants
     { regex: new RegExp(beforeSymbol + '\\+' + symbolRegex, 'g'),         css: 'constants' },
+    // global variables
     { regex: new RegExp(beforeSymbol + '\\*' + symbolRegex, 'g'),         css: 'constants bold' },
+    // comments
     { regex: new RegExp('(?:^|\\(|\\)|\\s);.*', 'g'),                     css: 'comments' },
+    // strings
     { regex: SyntaxHighlighter.regexLib.multiLineDoubleQuotedString,      css: 'string' },
+    // keywords
     { regex: new RegExp(this.getKeywords(keywords), 'g'),                 css: 'keyword' },
+    // functions related to signals
     { regex: new RegExp(this.getKeywords(errorKeywords), 'g'),            css: 'color3' }
   ];
 };
