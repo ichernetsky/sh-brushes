@@ -17,35 +17,36 @@
  */
 
 SyntaxHighlighter.brushes.CL = function () {
-    var keywords = 'defgeneric defmacro defmethod defsetf define-condition ' +
-	'define-method-combination define-setf-expander define-compiler-macro ' +
-	'define-modify-macro define-symbol-macro defconstant defvar defclass ' +
-	'defpackage defstruct deftype setf cond eval eval-when inline if lambda ' +
-	'let let* prog prog1 prog2 progn progv unwind-protect while block break ' +
-	'case ecase typecase declare declaim destructuring-bind do dolist dotimes ' +
-	'etypecase flet go handler-bind handler-case ignore-errors in-package ' +
-	'labels locally loop macrolet multiple-value-bind multiple-value-prog1 ' +
-	'proclaim restart-bind restart-case symbol-macrolet tagbody unless when ' +
-	'with-accessors with-compilation-unit with-condition-restarts ' +
-	'with-hash-table-iterator with-input-from-string with-open-file ' +
-	'with-open-stream with-output-to-string with-package-iterator ' +
-	'with-simple-restart with-slots with-standard-io-syntax catch throw ' +
-	'provide require t nil defun defvar defparameter';
-    var errorKeywords = 'abort assert warn check-type cerror error signal';
+  var keywords = 'defgeneric defmacro defmethod defsetf define-condition ' +
+    'define-method-combination define-setf-expander define-compiler-macro ' +
+    'define-modify-macro define-symbol-macro defconstant defvar defclass ' +
+    'defpackage defstruct deftype setf cond eval eval-when inline if lambda ' +
+    'let let* prog prog1 prog2 progn progv unwind-protect while block break ' +
+    'case ecase typecase declare declaim destructuring-bind do dolist dotimes ' +
+    'etypecase flet go handler-bind handler-case ignore-errors in-package ' +
+    'labels locally loop macrolet multiple-value-bind multiple-value-prog1 ' +
+    'proclaim restart-bind restart-case symbol-macrolet tagbody unless when ' +
+    'with-accessors with-compilation-unit with-condition-restarts ' +
+    'with-hash-table-iterator with-input-from-string with-open-file ' +
+    'with-open-stream with-output-to-string with-package-iterator ' +
+    'with-simple-restart with-slots with-standard-io-syntax catch throw ' +
+    'provide require t nil defun defvar defparameter';
+  var errorKeywords = 'abort assert warn check-type cerror error signal';
 
-    var symbolRegex = '\\w?(\\w|-)*';
+  var beforeSymbol = '(?:^|\\(|\\s+)';
+  var symbolRegex = '(?:&amp;|&lt;|&gt;|[-\\w\\d/<>\\=\\?\\*\\+%&]){3,}';
 
-    this.regexList = [
-	{ regex: new RegExp('(?:^);.*$', 'gm'), css: 'comments' },
-	{ regex: new RegExp('(?:\\s+);.*$', 'gm'), css: 'comments' },
-	{ regex: new RegExp('\\:' + symbolRegex, 'g'), css: 'color2' },
-	{ regex: new RegExp('&amp;' + symbolRegex, 'g'), css: 'value' },
-	{ regex: new RegExp("'" + symbolRegex, 'g'), css: 'variable' },
-	{ regex: new RegExp('\\+' + symbolRegex + '\\+', 'g'), css: 'constants' },
-	{ regex: SyntaxHighlighter.regexLib.multiLineDoubleQuotedString, css: 'string' },
-	{ regex: new RegExp(this.getKeywords(keywords), 'g'), css: 'keyword' },
-	{ regex: new RegExp(this.getKeywords(errorKeywords), 'g'), css: 'color3' }
-    ];
+  this.regexList = [
+    { regex: new RegExp(beforeSymbol + '\\:' + symbolRegex, 'g'),         css: 'functions' },
+    { regex: new RegExp(beforeSymbol + '(?:&amp;|&)' + symbolRegex, 'g'), css: 'value' },
+    { regex: new RegExp(beforeSymbol + "'" + symbolRegex, 'g'),           css: 'variable' },
+    { regex: new RegExp(beforeSymbol + '\\+' + symbolRegex, 'g'),         css: 'constants' },
+    { regex: new RegExp(beforeSymbol + '\\*' + symbolRegex, 'g'),         css: 'constants bold' },
+    { regex: new RegExp('(?:^|\\(|\\)|\\s);.*', 'g'),                     css: 'comments' },
+    { regex: SyntaxHighlighter.regexLib.multiLineDoubleQuotedString,      css: 'string' },
+    { regex: new RegExp(this.getKeywords(keywords), 'g'),                 css: 'keyword' },
+    { regex: new RegExp(this.getKeywords(errorKeywords), 'g'),            css: 'color3' }
+  ];
 };
 
 SyntaxHighlighter.brushes.CL.prototype = new SyntaxHighlighter.Highlighter();
